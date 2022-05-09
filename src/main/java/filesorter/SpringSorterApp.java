@@ -1,7 +1,7 @@
 package filesorter;
 
-import filesorter.exif_parser.ExifOriginalDateParser;
-import filesorter.exif_parser.ExifParser;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.File;
 
@@ -9,15 +9,10 @@ public class SpringSorterApp {
 
     public static void main(String[] args)  {
 
-
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppFactory.class);
         File directory = new File("/home/administrator/testDirectory/");
-
-        ExifParser exifParser  = new ExifOriginalDateParser(new FileLogCollector());
-
-
-
-        FileRenamer fr = new FileRenamer(new ExifOriginalDateParser(new FileRenamer(), new FileLogCollector()));
-        fr.renameFilesRecursively(directory);
+        RenameImagesUseCase renameImages = context.getBean(RenameImagesUseCase.class);
+        renameImages.renameFiles(directory);
 
     }
 

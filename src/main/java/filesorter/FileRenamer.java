@@ -1,8 +1,6 @@
 package filesorter;
 
-import filesorter.exif_parser.ExifOriginalDateParser;
 import filesorter.exif_parser.ExifParser;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -34,7 +31,7 @@ public class FileRenamer {
 
 
 
-    public  void renameFilesRecursively(File directory)  {
+    public void renameFilesRecursively(File directory)  {
         List<File> files = List.of(Objects.requireNonNull(directory.listFiles()));
         for (File file : files) {
             if (file.isDirectory()) {

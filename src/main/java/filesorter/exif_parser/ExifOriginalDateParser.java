@@ -1,8 +1,8 @@
 package filesorter.exif_parser;
 
 import filesorter.FileLogCollector;
+import filesorter.util.StringChanger;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.common.ImageMetadata;
 import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata;
@@ -10,17 +10,14 @@ import org.apache.commons.imaging.formats.tiff.TiffField;
 import org.apache.commons.imaging.formats.tiff.constants.ExifTagConstants;
 import org.apache.commons.imaging.formats.tiff.taginfos.TagInfo;
 import org.springframework.stereotype.Component;
-import  filesorter.util.StringChanger;
 
 import java.io.File;
-import java.io.IOException;
 
 @Component("exifDate")
 @RequiredArgsConstructor
 public class ExifOriginalDateParser implements ExifParser{
 
     private final FileLogCollector fileLogCollector;
-
 
     public String getTagName(File file)  {
         final ImageMetadata metadata;
@@ -36,7 +33,7 @@ public class ExifOriginalDateParser implements ExifParser{
             }
 
             if (!(metadata instanceof JpegImageMetadata)) {
-                fileLogCollector.getNotJpegMetadata().add(file)
+                fileLogCollector.getNotJpegMetadata().add(file);
                 return result;
 //                throw new RuntimeException("Can not parse Metadata from file: " + file);
             }
